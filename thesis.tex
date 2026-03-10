@@ -1,46 +1,45 @@
 \documentclass[
     pdftex,
-    %draft, % Prints a box at the end of overfull lines, changes behavior of some packages
+    %draft,
     final,
     11pt,
     a4paper,
-    parskip=false, % Paragraphs are identified by indentation of the first line by 1em
-    twoside, % Prepares the document for two-sided printing
-    footheight=0mm, % remove footer
+    parskip=false,
+    oneside,
+    footheight=0mm,
     footinclude=false,
-    toc=bibliography, % add bibliography to table of contents
-    toc=listof % add list of figures and tables to table of contents
-]{scrbook} % documentation: https://de.mirrors.cicku.me/ctan/macros/latex/contrib/koma-script/doc/scrguide-en.pdf
+    toc=bibliography
+]{scrbook}
 
 \input{header}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\thesistype}{Bachelor's Thesis} % Master's Thesis
-\newcommand{\thesistitle}{Thesis Title}
-\newcommand{\studentname}{Firstname Lastname}
-\newcommand{\submissiondate}{\nth{1} October 2025}
-\newcommand{\studentid}{12345678}
-\newcommand{\examiner}{Prof. Dr. Sebastian Baltes}
-\newcommand{\supervisor}{Title Firstname Lastname} % usually a doctoral or postdoctoral researcher
+\newcommand{\thesistype}{Seminar Report}
+\newcommand{\thesistitle}{Prompts as Software Artifacts: How Prompt Evolution in Practice Connects to LLM-Assisted Test Documentation}
+\newcommand{\studentname}{Mostafa Osama Ahmed Rabie}
+\newcommand{\submissiondate}{\nth{10} March 2026}
+\newcommand{\matriculation}{4755048}
+\newcommand{\examiner}{Prof.\ Dr.\ Sebastian Baltes}
+\newcommand{\supervisor}{Seyedmoein Mohsenimofidi}
 \newcommand{\uhd}{Heidelberg University, Germany}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\hyphenchar\font=\string"7F % fix hyphenation of hyphenated words, see https://tex.stackexchange.com/a/63234/100364
+\hyphenchar\font=\string"7F
 \selectlanguage{english}
 
-\frontmatter % roman numbers
+\frontmatter
 
 \begin{titlepage}
 
 	\begin{center}
-		\includegraphics[height=1.3cm,valign=t]{figures/logos/logo-uhd.png}	
+		\includegraphics[height=1.3cm,valign=t]{figures/logos/logo-uhd.png}
 		\hfill
-		\includegraphics[height=1.5cm,valign=t]{figures/logos/se-uhd-logo.png}	
+		\includegraphics[height=1.5cm,valign=t]{figures/logos/se-uhd-logo.png}
 	\end{center}
-	
+
 	\vspace{2cm}
 
     \begin{center}
@@ -50,8 +49,15 @@
         Software Engineering Group
     \end{center}
 
-    \vspace{3cm}
-    
+    \vspace{2cm}
+
+    \begin{center}
+        \large
+        Master's Advanced Seminar: Prompts as Software Artifacts
+    \end{center}
+
+    \vspace{2cm}
+
 	\begin{center}
 		{\large \thesistype}\\
 		\vspace{1.5\baselineskip}
@@ -65,10 +71,10 @@
     \begin{center}
         \large
         \begin{tabular}{@{}ll@{}}
-        \emph{Student Name:} & \studentname \\
-        \emph{Student ID:} & \studentid \\
-        \emph{Examiner:} & \examiner \\
-        \emph{Topic Supervisor:} & \supervisor \\
+        \emph{Student Name:}    & \studentname \\
+        \emph{Matriculation Number:}      & \matriculation \\
+        \emph{Examiner:}        & \examiner \\
+        \emph{Topic Supervisor:}& \supervisor \\
         \emph{Submission Date:} & \submissiondate
         \end{tabular}
     \end{center}
@@ -76,12 +82,9 @@
     \vspace{2cm}
 
 \end{titlepage}
-
 \begin{otherlanguage}{ngerman}
 \chapter*{Eigenständigkeitserklärung}
-	
-% https://www.hochschule-bayern.de/fileadmin/daten/Positionspapiere/KI-Leitlinie_Hochschule-Bayern-19052025.pdf
-% https://www.informatik.uni-heidelberg.de/c/image/f/default/pdfs/BSc-template.pdf
+
 Hiermit versichere ich, dass...
 
 \begin{enumerate}
@@ -89,159 +92,634 @@ Hiermit versichere ich, dass...
     \item ich die Inhalte der Arbeit vollständig verstanden habe und selbstständig vertreten kann.
     \item die Arbeit bisher nicht zur Erlangung eines akademischen Grades eingereicht wurde.
     \item ich alle aus Quellen übernommene oder mit Unterstützung von KI generierte Inhalte entsprechend anerkannter wissenschaftlicher Grundsätze bzw. den geltenden Regelungen zur Kennzeichnung von KI-Inhalten kenntlich gemacht habe.
-    %Ausgenommen von der expliziten Kenntlichmachung sind orthografische oder grammatikalische Korrekturen, Übersetzungen sowie nicht-sinnverändernde Verbesserungen von Formulierungen.
     \item ich ausschließlich die unten genannten KI-Werkzeuge verwendet habe, deren Nutzung vom Prüfer oder der Prüferin als Hilfsmittel zugelassen wurde.
     \item ich die unten genannten KI-Werkzeuge lediglich als Hilfsmittel genutzt habe, die von KI generierten Inhalte kritisch überprüft habe, und mein eigenständiger kognitiver sowie kreativer Einfluss in dieser Arbeit überwiegt.
 \end{enumerate}
 
 Ich bin damit einverstanden, dass diese elektronische Fassung universitätsintern anhand einer Plagiatssoftware auf Plagiate überprüft wird.\\
 
-Verwendete KI-Werkzeugen {\small(basierend auf dem \href{https://backend.heiskills.uni-heidelberg.de/de/dokumente/ki-formular-de/download}{Musterformular} der Universität Heidelberg)}:
+Verwendete KI-Werkzeuge {\small(basierend auf dem \href{https://backend.heiskills.uni-heidelberg.de/de/dokumente/ki-formular-de/download}{Musterformular} der Universität Heidelberg)}:
 
-% https://backend.heiskills.uni-heidelberg.de/de/dokumente/ki-formular-de/download
-% https://backend.heiskills.uni-heidelberg.de/de/dokumente/ai-sample-form-en/download
 \begin{center}
 \small
 \begin{tabularx}{\linewidth}{|l|X|X|}
 \hline
 \textbf{KI-Werkzeug} & \textbf{Verwendungszweck} & \textbf{Kommentare (optional)} \\
 \hline
-ChatGPT & Erstellung eines Gliederungsentwurfs. & n/a \\
+Claude Code & Unterstützung beim Strukturieren und Verfassen des Berichts. & Alle generierten Inhalte wurden von mir geprüft und inhaltlich überarbeitet. \\
 \hline
-DeepL & Übersetzung von deutschen Texten ins Englische. & Es erfolgte eine Kontrolle durch einen Muttersprachler. \\ \hline
-Claude Code & Unterstützung bei der Entwicklung des Tool-Prototyps. & Jeglicher generierter Code wurde von mir begutachtet und ggf. überarbeitet. \\
+DeepL & Übersetzung einzelner Textabschnitte ins Deutsche. & Übersetzungen wurden manuell auf Richtigkeit überprüft. \\
 \hline
-\end{tabularx} 
+\end{tabularx}
 \end{center}
 
 \vspace{2cm}
-	
+
 \noindent\begin{tabularx}{\textwidth}{XXXX}
 	&&& \\
 	\cline{1-1}\cline{4-4}\footnotesize\centering Ort und Datum		&&& \footnotesize\centering Unterschrift
 \end{tabularx}
-	
+
 \newpage
 
 \chapter*{Zusammenfassung}
 
-Die Zusammenfassung muss auf Deutsch und auf Englisch geschrieben werden. Die Zusammenfassung sollte zwischen einer halben und einer ganzen Seite lang sein. Sie soll den
-Kontext der Arbeit, die Problemstellung, die Zielsetzung und die entwickelten Methoden
-sowie Erkenntnisse bzw. Ergebnisse übersichtlich und verständlich beschreiben.
+Große Sprachmodelle (engl. Large Language Models, LLMs) werden heute von vielen Entwicklern in ihre Software integriert. Dabei schreiben sie sogenannte Prompts, also natürlichsprachliche Anweisungen, die direkt im Quellcode eingebettet werden. Diese Prompts verändern sich über die Zeit, ähnlich wie regulärer Code, und sollten daher als Software-Artefakte behandelt werden.
+
+Dieser Bericht analysiert drei Forschungsarbeiten, die sich mit natürlichsprachlichen Artefakten in der Softwareentwicklung befassen. Die Hauptstudie von Tafreshipour et al. (2025) untersucht erstmals empirisch, wie Prompts in echten Open-Source-Projekten auf GitHub verändert werden. Die Studie zeigt, dass Entwickler Prompts häufig anpassen, diese Änderungen jedoch selten dokumentieren und die Auswirkungen kaum überprüfen. Zwei Folgestudien von Aljohani et al. (2025) und Mollah et al. (2025) untersuchen, ob LLMs automatisch Dokumentation für Testcode erzeugen können, nämlich Assertion-Nachrichten und Testzusammenfassungen.
+
+Die drei Arbeiten teilen ein gemeinsames Thema: Natürlichsprachliche Artefakte in Software werden systematisch vernachlässigt, und LLMs bieten sowohl neue Herausforderungen als auch mögliche Lösungsansätze. Der Bericht diskutiert die Verbindungen zwischen diesen Studien, ihre methodischen Gemeinsamkeiten und die verbleibenden offenen Fragen.
 
 \end{otherlanguage}
 
 \chapter*{Abstract}
 
-The abstract has to be given in German and English. It should be between half a
-page and one page in length. It should cover in a readable and comprehensive style the
-context of the thesis, the problem setting, the objectives, and the methods developed in
-this thesis as well as key insights and results.
+Large language models have become a common component in many software applications. When developers integrate them, they write prompts: plain language instructions embedded as string literals in the source code. These prompts get updated over time, much like regular code, which raises the question of whether they should be managed with the same care.
 
-\chapter*{Acknowledgments}
+This report looks at three papers on natural language artifacts in software engineering. The main study, by Tafreshipour et al. (2025), is the first large-scale empirical investigation of how prompts evolve in real open-source GitHub repositories. It shows that developers modify prompts in structured ways but almost never document those changes, and the changes do not reliably produce the intended effect. Two follow-up papers by Aljohani et al. (2025) and Mollah et al. (2025) then ask whether LLMs can automatically generate documentation for test code, specifically assertion messages and test method summaries.
 
-\lipsum[1-4]
+All three papers point at the same gap: natural language artifacts in software go largely undocumented, for different reasons and across different artifact types. The report discusses how the follow-up papers connect to the core findings, what the three papers share methodologically, and what questions they leave open.
 
 \tableofcontents
 
-%\cleardoublepage
 \clearpage
 
-\mainmatter % arabic numbers
+\mainmatter
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
 \label{ch:introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% you can use quotations at the start of each chapter using this environment
-\begin{chapter-quotation}{Ward Cunningham, The Pragmatic Programmer (2000)}
-If you don't think carefully, you might think that programming is just typing statements in a programming language.
-\end{chapter-quotation} 
+Most of software development is about managing things that change. As a project grows, the codebase become bigger and the existing parts need updating. In recent years a new kind of artifact has appeared inside many codebases which is the natural language prompt that controls how an LLM behaves.
 
-%exemplary paragraph with citations
-The software engineering research community is often criticized for not addressing the problems that practitioners actually face during their work~\cite{Briand2012}.
-At the same time, software developers' beliefs are rather based on their personal experience than on empirical findings~\cite{DevanbuZimmermannOthers2016}.
-We s\textsf{s}ummarize this discussion in \autoref{ch:background}.
+When developers build applications on top of LLMs, they write these prompts as a string in the source code. A prompt might define a role for the model, or set constraints on the output, or simply describe the task. It gets committed to Git, and changed when something does not work, and sometimes it breaks during refactoring just like any other part of the code. Prompts share many characteristics with other software artifacts but the difference is that there is no compiler or test suite that can check whether a prompt is actually working correctly. The only way to verify it is to run the model and look at the output.
 
-\begin{java}
-public class HelloWorld {
-  public static void main(String[] args) {
-    System.out.println("Hello, World!");
-  }
-}
-\end{java}
+The idea that prompts should be treated as software artifacts is the topic of this seminar. And as the main paper shows that developers in real projects already treat prompts more like code, they modify them in structured ways even without the right tools to do it properly.
 
-If you want to embed quotes, like the one by W. Edwards Deming who said that \enq{without data, you're just another person with an opinion}, you can use the custom \texttt{\textbackslash enq} command.
-
-\todo{Formulate problem statement}
-
-\begin{graybox}{Problem Statement}
-Problem statement.
+\begin{graybox}{Scope of This Report}
+This report is based on three papers:
+\begin{description}[style=multiline, labelindent=\parindent, leftmargin=\rqindent, itemsep=-1ex]
+\item[P1] Tafreshipour et al. (2025) -- \emph{Prompting in the Wild: An Empirical Study of Prompt Evolution in Software Repositories} \cite{Tafreshipour2025}
+\item[P2] Aljohani et al. (2025) -- \emph{Assertion Messages with Large Language Models (LLMs) for Code} \cite{Aljohani2025}
+\item[P3] Mollah et al. (2025) -- \emph{Assertion-Aware Test Code Summarization with Large Language Models} \cite{Mollah2025}
+\end{description}
+P2 and P3 both cite P1 and address a related but distinct problem: the documentation gap in software testing.
 \end{graybox}
 
-\todo{Formulate research question(s)}
+\section{Motivation and Research Focus}
 
-\begin{graybox}{Research Questions}
+Prompts matter because they control what an LLM integrated component produces. For example: A customer service bot, a code assistant, a document summarizer, each one of them is as good as the prompts guiding it. Unlike regular code, prompt behavior is hard to predict without running the model, and there are almost no tools specifically designed for testing prompts. This creates a practical risk that is easy to underestimate. A bad prompt can cause an LLM component to behave incorrectly or inconsistently and detecting that kind of failure is harder than detecting a bug in the regular code.
+
+P2 and P3 deal with a different documentation problem but related to the main paper, in the two papers the documentation problem is in software testing, where test methods in many projects lack assertion messages and summary comments, which makes debugging very difficult and time consuming and it reduces the usefulness of the test suite. Both follow-up papers ask whether LLMs can fill these gaps automatically. The connection to P1 is that all three papers are dealing with the same issue where natural language artifacts that developers create are rarely documented properly. LLMs appear on both sides of the problem, as something that creates new documentation challenges and also as a possible tool for addressing some of the existing ones.
+
+By reading the three papers together there is some kind of a loop, where P1 looks at what happens when developers write and maintain prompts. While P2 and P3 look at what happens when LLMs are used to generate human-readable artifacts (test documentation). The same technology creates documentation debt in one context and tries to help pay it down in another.
+
+This report works through the three papers by examining: (1) what P1 found about how developers actually treat prompts as software artifacts, (2) how P2 and P3 connect this to test documentation, (3) what the papers share methodologically, and (4) the limits and what remains unanswered.
+
+\autoref{ch:background} introduces the technical background. \autoref{ch:related} review related work. \autoref{ch:method} describes the research method. \autoref{ch:core} presents the core findings from P1. \autoref{ch:followup} presents the findings from P2 and P3. \autoref{ch:discussion} synthesizes and reflects on all three papers. \autoref{ch:conclusion} concludes the report.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Background}
+\label{ch:background}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+To understand the three papers in this report, some background is needed on large language models and their role in software engineering, on prompt engineering, on how developers document software artifacts, and on the challenges of evaluating generated text.
+
+\section{Large Language Models in Software Engineering}
+
+Large language models are trained on large amounts of text and learn to predict the next token in a sequence. Through this process they pick up patterns in language and, in more recent versions, in code as well. The transformer architecture introduced in 2017 made training at this scale practical. GPT-3 \cite{Brown2020}, released in 2020, was one of the first publicly available models to show that a single large model could handle many different tasks without being trained specifically for each one, just by being shown a few examples in the prompt.
+
+Since then, several models have been adapted specifically for code. Codex, GPT-4 \cite{OpenAI2023}, DeepSeek-Coder, and Qwen2.5-Coder are all trained on source code alongside natural language text, and can generate, complete, and summarize programs well enough to be practically useful. Tools like GitHub Copilot are built on these models and have been shown to speed up certain tasks for developers \cite{Ziegler2022}.
+
+In software engineering research, LLMs have been applied to code review, bug detection, test generation, code summarization, and documentation generation. The three papers in this report fall into the last two categories, though P1 also uses LLMs as classifiers for analyzing commit messages.
+
+One thing that makes LLM integration different from regular library dependencies is that you cannot pin the behavior the same way. A traditional library can be locked to a specific version and tested against a fixed specification. An LLM is harder to lock down: the same prompt can return different outputs on different runs, and model providers can update the underlying model without changing the API endpoint. So developers cannot test LLM calls the way they test regular functions. A test that checks for a specific output string will fail whenever the model rephrases its answer, even if the answer is equally correct. This is part of why P1 finds what it finds: developers make changes to prompts without any reliable way to verify whether those changes actually help.
+
+The variety of available models has also grown fast. Developers can use proprietary models through cloud APIs (like GPT-4 or Claude), open-weight models running locally (like LLaMA or Mistral), or specialized code models (like Codex or DeepSeek-Coder). Different models respond differently to the same input, which affects how prompts should be written. P1 touches on this when it identifies ``technology adaptation'' as one of the intent categories in documented prompt changes: developers sometimes change a prompt specifically because they switched to a different underlying model.
+
+\section{Prompt Engineering}
+
+When using an LLM, the prompt is the input that guides the model's behavior. Designing prompts carefully to get reliable outputs is called prompt engineering, and the quality of a prompt can have a large effect on the quality of the response.
+
+Researchers have identified several components that prompts can contain. Schulhoff et al. \cite{Schulhoff2024} surveyed over 50 prompting techniques and found that prompts typically combine a directive (the core task instruction), a role (who the model should act as), examples (demonstrations of expected behavior), and output formatting instructions. P1 adapts this component taxonomy for its own analysis.
+
+One well-known technique is chain-of-thought prompting, proposed by Wei et al. \cite{Wei2022}, which asks the model to reason step by step before giving a final answer and has been shown to improve accuracy on reasoning tasks. Another relevant technique is fill-in-the-middle (FIM) prompting \cite{Bavarian2022}, where the model receives a prefix and a suffix and must predict what goes between them. This is particularly useful for code completion, and it is the approach P2 uses for generating assertion messages.
+
+Prompting strategies also differ by how much information is given upfront. In zero-shot prompting, the model receives only the task description. In few-shot prompting, a small number of input-output examples are included to demonstrate the expected behavior. Research has consistently shown that few-shot prompting improves performance on tasks where the desired output format is non-obvious, but it increases prompt length, which can affect latency and cost. This tradeoff shows up in P1's findings too: adding examples is one of the common prompt change types the study identifies, which suggests developers discover through experience that zero-shot prompts are often not enough.
+
+Another important distinction is between system prompts and user prompts. Modern LLM APIs separate these two roles: the system prompt sets the model's behavior and persona, while the user prompt contains the actual request. In applications using this structure, the system prompt carries most of the engineering decisions (role, constraints, output format), while the user prompt is filled dynamically at runtime. P1 focuses on system prompts, which are the parts developers write and version-control as part of the codebase.
+
+\subsection{Prompts as Embedded Code Artifacts}
+
+When a developer builds an application that uses an LLM, prompts are typically written as string literals in the source code. For example:
+
+\begin{code}
+SYSTEM_PROMPT = """You are a helpful assistant.
+Summarize the document in three bullet points.
+Be concise and do not include opinions."""
+\end{code}
+
+This prompt is stored in version control, can be changed, reviewed in pull requests, and reverted if something goes wrong. It controls the behavior of the LLM component just as a function body controls what that function returns. The key difference from regular code is that there is no type checker, no linter, and no compiler that can verify whether the prompt is correct. The only way to know if a prompt works is to run the model and check the output.
+
+If prompts are engineering artifacts, they should be subject to the same quality standards as code. But as P1 shows, current practices fall well short of that.
+
+\section{Software Documentation and Testing}
+
+Good documentation matters throughout a software project. Without it, developers struggle to understand code written by others, or even by their past selves. Documentation helps teams maintain code over time, onboard new contributors, and recover from bugs faster.
+
+Despite this, documentation is often incomplete or missing. This is a well-known problem in software engineering research \cite{Ciniselli2021}. Test code is a particularly relevant area. Tests are a form of executable documentation: they show what the code is supposed to do and under what conditions. But test code itself often lacks its own documentation.
+
+Two specific documentation artifacts are studied in P2 and P3:
+
+\begin{description}
+    \item[Assertion messages] are optional text parameters inside assertion statements. For example, \texttt{assertEquals("Cart should have 3 items", 3, cart.size())} tells the developer exactly what went wrong if the assertion fails. Without a message, all the developer sees is \texttt{expected: 3 but was: 5}, which requires reading the test code to understand the context.
+
+    \item[Test method summaries] are short comments at the start of a test method that describe its purpose. They are analogous to Javadoc comments on production methods. A good test summary lets a developer understand what a test checks without reading its full implementation.
+\end{description}
+
+Both of these artifacts are frequently missing in practice. P2 reports that only about 6\% of test methods in their dataset include assertion messages, which means the presence of a message is more the exception than the norm. The follow-up papers ask whether LLMs can automatically generate these missing artifacts.
+
+The problem is made worse by automated test generation tools. Tools like EvoSuite can generate large numbers of test cases automatically, and the tests will typically pass and provide coverage, but the resulting code is almost unreadable to humans. Generated tests have names like \texttt{test0()}, \texttt{test1()}, and so on, and the assertions contain no explanatory messages. This is exactly the situation where automatic documentation generation could add real value: the test code exists and works, but nobody can understand what it tests without reading every line. P2 and P3 both address this by trying to generate the missing natural language explanations.
+
+\section{Testing LLM-Integrated Components}
+
+Testing regular software is a well-understood practice. Developers write unit tests and integration tests, run them on every commit, and treat a failing test as a blocker. This works because code behavior is deterministic: given the same input, a function always returns the same output.
+
+Testing LLM-integrated components is different. The same input may return different outputs on different runs depending on sampling temperature, model version, or subtle changes in the prompt context. This non-determinism makes traditional assertion-based testing unreliable. A test that checks for an exact string match will fail whenever the model rephrases its response, even if the response is equally correct. A test that only checks for the presence of a keyword may pass even when the model is producing wrong answers.
+
+One approach researchers have explored is behavioral testing: instead of checking exact outputs, tests check whether certain properties hold. A test for a code summarization function might check that the generated summary is shorter than the original code and does not contain certain forbidden words, without checking the exact wording. Another approach is evaluation-based testing, where a separate LLM (or a human) judges whether the output is acceptable. This is essentially what LLM-Eval does in P2 and P3.
+
+The broader problem is that tooling for testing LLM-integrated components is still immature. P1 finds that only 7 out of 101 projects with prompt changes had any executable test infrastructure for their LLM components. That is the actual state of practice in 2024: most developers building with LLMs are making prompt changes and hoping they work, with no systematic way to verify the results. This gap is a real motivation for the kind of research P2 and P3 represent: if testing is hard, documentation can at least help developers understand what each component is supposed to do.
+
+\section{Evaluation of Generated Natural Language}
+
+Evaluating whether a generated text is good is not straightforward. Three approaches appear across P2 and P3. Lexical metrics such as BLEU \cite{Papineni2002}, ROUGE-L, and METEOR count shared n-grams between the generated text and a reference. They are fast but have a known weakness: two texts with the same meaning but different words will score low. BERTScore \cite{Zhang2020} addresses this by comparing embeddings from a pretrained language model rather than surface words, making it more robust to paraphrasing. A newer approach, LLM-Eval \cite{Sun2024}, uses a powerful LLM as a judge that scores the output against task-specific criteria. Both P2 and P3 argue that LLM-Eval is the most meaningful metric for their tasks, and both note that lexical metrics can be misleading for short or structurally diverse texts. All three approaches have limitations, and none of them fully substitute for a user study with real developers.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Related Work}
+\label{ch:related}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{chapter-quotation}{Donald Knuth, The Art of Computer Programming (1968)}
+Science is what we understand well enough to explain to a computer. Art is everything else.
+\end{chapter-quotation}
+
+This chapter surveys prior work that contextualizes the three papers analyzed in this report. It covers empirical studies of prompting practices before P1, prior work on automated code documentation that motivated P2 and P3, and the evaluation methodology used across all three papers.
+
+\section{Empirical Studies of Prompt Practices}
+
+Before P1, there was very little empirical work on how prompts are managed in real software projects. The PromptSet dataset by Pister et al. \cite{Pister2024}, published at the LLM4Code 2024 workshop, was an important precursor: it collected prompts from Python repositories on GitHub and characterized their structural properties. PromptSet focused on the static content of prompts at a single point in time, though, not on how they change over time. P1 extends this work directly by tracing the Git history of the same kinds of repositories and studying prompt evolution.
+
+The broader survey by Schulhoff et al. \cite{Schulhoff2024} catalogs over 50 prompting strategies and provides the component taxonomy that P1 adapts for its analysis. That survey identifies best practices and common failure modes but does not study actual developer behavior in real projects. The gap between recommended practice and what developers actually do in production code is what P1 investigates.
+
+Research on how developers interact with AI coding tools like GitHub Copilot \cite{Ziegler2022} provides additional context: it shows that LLM-assisted development is now widespread, which makes the question of how LLM components are maintained increasingly relevant.
+
+\section{Automated Code Documentation}
+
+Generating natural language documentation from code has been an active research area for over a decade. Early approaches used rule-based templates derived from method signatures. Later systems trained neural models on code-comment pairs. Ciniselli et al. \cite{Ciniselli2021} characterized the quality and completeness of developer-written comments in large Java projects, finding that documentation quality varies substantially across projects and that missing or outdated documentation is common. This provides the baseline picture of the documentation problem that P2 and P3 address.
+
+For test code specifically, Takebayashi et al. \cite{Takebayashi2023} curated a benchmark of well-engineered Java projects with high-quality test suites. P2 uses this dataset directly as the source of test methods for assertion message generation. The CodeXGLUE benchmark \cite{Lu2021} standardized evaluation for multiple code intelligence tasks including code summarization, and P3 uses it as the source for its filtered test method dataset. Both benchmarks are publicly available and have been used in multiple follow-up studies.
+
+\section{LLM-Based Evaluation of Generated Text}
+
+The LLM-Eval methodology used in P2 and P3 is based on the framework by Sun et al. \cite{Sun2024}, which uses a large LLM as a judge to score generated outputs against task-specific criteria. Sun et al. validate this approach against human ratings and show that it correlates better with human judgment than BLEU \cite{Papineni2002} or ROUGE for documentation tasks. P1 uses the same LLM-as-classifier idea, employing LLaMA3-70B to classify commit messages into maintenance categories. Across all three papers, automated LLM-based analysis substitutes for manual annotation that would be impractical at the required scale. This convergence on LLM-as-evaluator is one of the key methodological trends the three papers collectively illustrate.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Research Method}
+\label{ch:method}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This chapter describes how the three papers were selected for analysis and how the analysis in this report was conducted.
+
+\section{Paper Selection}
+
+The core paper (P1) was assigned as the primary reading for the seminar ``Prompts as Software Artifacts'' at Heidelberg University. The two follow-up papers (P2 and P3) were identified by searching for publications that cite P1 in Google Scholar and IEEE Xplore. Papers were included if they: (1) were published or made publicly available in 2025, (2) directly cited P1, and (3) addressed a software engineering problem related to natural language artifacts or LLM integration. Aljohani et al. \cite{Aljohani2025} and Mollah et al. \cite{Mollah2025} satisfied all three criteria. Both papers come from the same research group at the University of North Texas and are explicitly companion works, making them a coherent pair of follow-up studies.
+
+\section{Analysis Approach}
+
+Each paper was analyzed along four dimensions: the research problem and motivation, the methodology and dataset, the main quantitative and qualitative results, and limitations and open questions. The analysis was conducted by reading each paper in full and extracting the relevant findings systematically. The cross-paper synthesis in \autoref{ch:discussion} was developed by identifying shared themes, methodological similarities and differences, and connections between findings that the papers themselves do not make explicit.
+
+No new empirical data was collected for this report. The analysis is entirely secondary, based on the published papers and their referenced datasets.
+
+\section{Data Availability}
+
+The PromptSet dataset underlying P1 is publicly available through the repository accompanying Pister et al. \cite{Pister2024}. The Java test method dataset used by P2 is derived from the benchmark curated by Takebayashi et al. \cite{Takebayashi2023}. The test methods used by P3 are drawn from the CodeXGLUE benchmark \cite{Lu2021}, filtered according to the criteria described in the paper. All three primary papers are publicly available: P1 through the MSR 2025 conference proceedings, and P2 and P3 as preprints on arXiv.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Prompting in the Wild: Core Findings}
+\label{ch:core}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{chapter-quotation}{Fred Brooks, The Mythical Man-Month (1975)}
+Show me your flowchart and conceal your tables, and I shall continue to be mystified. Show me your tables, and I won't usually need your flowchart.
+\end{chapter-quotation}
+
+The main paper for this seminar is ``Prompting in the Wild: An Empirical Study of Prompt Evolution in Software Repositories'' by Tafreshipour et al. \cite{Tafreshipour2025}. It was presented at the IEEE/ACM Mining Software Repositories (MSR) conference in 2025 and is the first large-scale empirical study of how prompts in real open-source software applications change over time.
+
+\section{Overview and Methodology}
+
+The paper starts from a simple observation: developers embed prompts in their source code, and those prompts change. But nobody had studied this systematically before. The authors ask nine research questions across four themes: what types of changes are made (RQ1, RQ2, RQ3), how prompt changes relate to code maintenance activities (RQ4, RQ5), how well changes are documented (RQ6, RQ7), and whether changes produce the intended LLM behavior (RQ8, RQ9). This report focuses on RQ1, RQ2, RQ6, RQ8, and RQ9, as these are the most directly relevant to the seminar topic and the follow-up papers.
+
+The authors start with the PromptSet dataset \cite{Pister2024}, a collection of prompts from Python repositories on GitHub. After filtering prompts by length (at least 15 words) and repository quality (at least 50 stars, 10 contributors, 6 months of activity), they trace the Git history of 1,568 repositories up to August 2024 and compare consecutive prompt versions using ROUGE-L similarity. The final dataset contains 1,262 unique prompt changes across 243 repositories. Two authors independently coded a random sample of 225 changes (agreement: 65\% Jaccard), producing a codebook for change types and prompt components. Additional analyses used LLaMA3-70B to classify commit messages into maintenance activity categories.
+
+The choice to use ROUGE-L for detecting prompt changes is important. Rather than relying on Git diffs alone, the authors compute similarity between consecutive versions of each prompt and flag pairs below a threshold as genuine changes. This handles cases where a prompt change is embedded in a larger diff that also modifies other parts of the file. The threshold-based approach also means that very minor edits (like adding a period or fixing one character) may be excluded, which is intentional: the study focuses on meaningful changes that reflect developer intent.
+
+Using LLaMA3-70B in 4-bit quantization for commit classification is a pragmatic choice. Running the model locally avoids the cost and privacy concerns of sending commit data to a proprietary API, but it comes at the price of accuracy (51\% as reported). Any finding that depends on the commit classification (the maintenance activity analysis in RQ4 and RQ5) should be read as an approximation rather than a precise measurement. The authors acknowledge this limitation openly, which is reasonable given that 51\% is simply the current state of the art for automated commit classification at this scale.
+
+\section{Taxonomy of Prompt Change Types}
+
+One of the central contributions of the paper is a taxonomy of eight change types, divided into two categories.
+
+\textbf{Component-dependent changes} affect a specific structural component of the prompt:
+\begin{itemize}
+    \item \textit{Addition} (30.1\% of all changes): adding a new component that was not there before.
+    \item \textit{Modification} (25.5\%): changing the content of an existing component.
+    \item \textit{Removal} (8.8\%): deleting a component entirely.
+\end{itemize}
+
+\textbf{Component-independent changes} affect the form rather than the content of the prompt:
+\begin{itemize}
+    \item \textit{Rephrase} (17.4\%): rewriting for clarity without changing meaning.
+    \item \textit{Formatting} (7.9\%): adjusting structure or layout.
+    \item \textit{Correction} (4.9\%): fixing typos, grammar errors, or factual mistakes.
+    \item \textit{Generalization} (2.3\%): making the prompt applicable to more cases.
+    \item \textit{Restructure} (2.0\%): reorganizing the prompt without changing individual components.
+\end{itemize}
+
+The most obvious pattern here is the ratio of additions (30.1\%) to removals (8.8\%). Developers add to prompts about 3.4 times more often than they remove from them. This is familiar from general software development: features and instructions tend to accumulate, and simplification is harder to justify. Over time, prompts are likely to grow longer and more complex.
+
+The authors also refine the component taxonomy from Schulhoff et al. \cite{Schulhoff2024}, keeping six components: Directive (the core task), Role (who the model should act as), Examples, Output Instruction (formatting and style requirements), Additional Information (context), and Consideration (behavioral constraints and guidance). \autoref{tab:components} summarizes the change distribution across components.
+
+\begin{table}[htbp]
+\centering
+\caption{Distribution of component-dependent changes across prompt components (P1).}
+\label{tab:components}
+\small
+\begin{tabularx}{\linewidth}{lrrrl}
+\toprule
+\textbf{Component} & \textbf{Add \%} & \textbf{Modify \%} & \textbf{Remove \%} & \textbf{Share of all component changes} \\
+\midrule
+Consideration      & 51.1 & 35.7 & 13.2 & 60.4\% \\
+Additional Info    & 36.0 & 27.9 & 36.0 & 16.4\% \\
+Output Instruction & 25.9 & 71.4 & 2.7  & 11.9\% \\
+Example            & 44.0 & 46.7 & 9.3  & 8.0\%  \\
+Role               & 13.3 & 73.3 & 13.3 & 3.2\%  \\
+Directive          & 0.0  & 100.0 & 0.0 & 0.2\%  \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The Consideration component accounts for 60.4\% of all component changes, which makes sense given that Consideration covers behavioral instructions like ``always be polite'', ``do not make assumptions'', or ``respond only in formal English.'' These are the kinds of details developers refine iteratively as they observe the model's behavior in practice. The Directive component (the core task description) is almost never changed, which suggests that developers establish the fundamental purpose of a prompt early and rarely revisit it.
+
+\section{Prompt Changes and Software Maintenance Activities}
+
+When do developers change prompts? The paper investigates this by classifying the commits that contain prompt changes into three types of maintenance activity using an LLM classifier: feature development, bug fixing, and refactoring.
+
+The results show that the majority of prompt-changing commits (59.7\%) are associated with feature development. Adding new functionality to an LLM-integrated application often requires updating the prompt to handle new cases or produce new types of content. Bug fixing accounts for 18.9\% of prompt-changing commits, and refactoring accounts for 14.5\%.
+
+The distribution of change types across these activities follows a pattern that matches what you would expect. In feature development, Addition and Rephrase changes are most common, because new features require new instructions and often involve rewriting existing parts for clarity. In bug fixing, Modification of Consideration is the most common change type, and Correction changes appear more frequently. Fixing a bug in an LLM application often means discovering that the model misunderstood a particular instruction and then clarifying it. In refactoring, Rephrase is the dominant change type, reflecting the goal of improving clarity without changing behavior.
+
+These patterns are similar to what software engineering research has found for regular code changes. Feature development dominates, bug fixes are more targeted, and refactoring touches form rather than content. The parallel suggests that developers maintain prompts for the same reasons they maintain regular code. The main difference is that the tooling to support this maintenance does not yet exist.
+
+\section{Documentation Gap}
+
+The most striking finding in P1 is about documentation. Out of 931 commits that involved prompt changes, only 204 (21.9\%) mentioned the prompt change in the commit message. Of those 204, only 62 were specific enough to explain what actually changed and why. The remaining 142 were vague statements like ``update prompts'' or ``tweak system message.''
+
+\begin{graybox}{Key Finding: Documentation Gap in Prompt Changes}
+In approximately 78\% of commits that modify a prompt, the commit message provides no information about what changed or why. This makes it difficult for a team member reviewing the history to understand the intention behind a prompt modification.
+\end{graybox}
+
+The 62 specific commit messages were coded into seven categories of intent. Task-specific changes (e.g., improving data processing, enhancing context accuracy) accounted for the majority (40 of 62). Other categories included typo/grammar fixes, output modifications, template updates, technology adaptations, reformatting, and handling LLM hallucinations.
+
+The hallucination category is particularly interesting: two commits explicitly documented an attempt to reduce hallucinated outputs by modifying the prompt. This shows that developers are aware of this problem and try to address it through prompt engineering, but there is little systematic guidance on how to do so effectively.
+
+\section{Effectiveness of Prompt Changes}
+
+A critical question the paper tries to answer is whether prompt changes actually work. Of 101 projects with documented changes, only 7 had executable test cases that could be used to compare LLM responses before and after the change. That number is itself revealing: almost no open-source projects have test infrastructure for their LLM components. Among the 7 usable projects, 4 showed accurate adaptation (the LLM response changed as intended), 2 showed no change despite significant modifications, and 1 showed an unintended change. The sample is far too small to draw general conclusions, but it does confirm that making a change to a prompt does not reliably produce the expected behavior shift.
+
+The paper also investigated inconsistencies introduced by prompt changes. Using an LLM with chain-of-thought prompting to flag potential inconsistencies, and then manually reviewing the results, the authors identified 15 genuine inconsistencies. These fell into three types:
+
+\begin{itemize}
+    \item \textbf{Contradictory instructions}: the prompt contained statements that directly conflicted with each other (e.g., ``keep it short'' and ``provide comprehensive details'' in different parts of the same prompt).
+    \item \textbf{Structural conflicts}: instruction tags were nested or placed incorrectly, causing the model to misinterpret the structure of the prompt.
+    \item \textbf{Format misalignments}: the prompt was updated for a new task but old formatting tags or labels from the previous task were not cleaned up.
+\end{itemize}
+
+These are the kinds of bugs that a compiler or static analysis tool would catch immediately in regular code. Prompts have no such safety net, which is one reason managing them is harder than managing code.
+
+\section{Critical Assessment of the Core Paper}
+
+P1 makes a strong contribution by establishing prompt evolution as a legitimate research topic and providing the first empirical dataset and taxonomy. But several limitations affect how the findings should be interpreted.
+
+The study is restricted to Python repositories. Python is currently the dominant language for LLM-integrated applications, largely because of libraries like LangChain, but many production systems use other languages. Whether the same patterns hold in JavaScript, Java, or Go is unknown. This also means that the PromptSet dataset, which was the study's starting point, may not be representative of the full range of prompt engineering practices.
+
+The commit classification accuracy is approximately 51\% (using LLaMA3-70B in 4-bit quantized form). This means results for RQ4 and RQ5, which map prompt changes to maintenance activities, should be treated with some caution. The authors acknowledge this and note that it reflects the current state of the art for automated commit classification, but it is still a meaningful constraint.
+
+A related concern is the filtering threshold of 15 words for prompt length. A simple directive like ``Summarize in three bullet points'' is only 6 words but is a real artifact a developer might change. Excluding such prompts means the study captures only a subset of prompt engineering practice.
+
+The effectiveness analysis (RQ9) is based on only 7 projects. The finding that some prompt changes fail to produce the intended behavior is important, but the sample is too small to know how common this is. The reason only 7 projects were usable is itself arguably the more important finding: almost no open-source LLM-integrated projects have test infrastructure for their LLM components. It suggests the entire practice of testing LLM components is essentially non-existent in open-source software right now.
+
+The inter-rater agreement of 65\% on the main qualitative coding also indicates some ambiguity in the taxonomy. This does not invalidate the results, but it means the categories have some degree of overlap or interpretation difficulty. Different researchers applying the same codebook might arrive at different classifications for borderline cases, which limits reproducibility.
+
+Despite these limitations, P1 does what it sets out to do: it shows that prompt evolution is a real and structured phenomenon, identifies a documentation gap that is hard to ignore, and raises concrete questions about effectiveness and quality for future research to address.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{LLM-Generated Test Documentation: Follow-Up Findings}
+\label{ch:followup}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{chapter-quotation}{Brian Kernighan and Rob Pike, The Practice of Programming (1999)}
+The most important skill in programming is the ability to communicate.
+\end{chapter-quotation}
+
+The two follow-up papers both study whether LLMs can automatically generate documentation for test code. At first glance, the connection to P1 is not obvious, since P1 is about how developers modify prompts and P2/P3 are about test method documentation. It helps to explain why these three papers belong together before going into the details.
+
+The first connection is methodological. P2 and P3 both cite P1 as evidence that using an LLM to classify or evaluate software artifacts is a valid research approach. In P1, the authors use LLaMA3-70B to classify commit messages into categories of maintenance activity, avoiding expensive manual annotation at scale. P2 and P3 borrow this idea: they use GPT-4 to classify the structure of assertion messages and to score generated outputs through LLM-Eval.
+
+The second connection is about the research problem itself. All three papers deal with the same underlying gap: developers do not document the natural language artifacts they produce. P1 shows that 78\% of prompt changes go undocumented in commit messages. P2 finds that only 6\% of test methods include assertion messages. P3 cannot find even 100 test methods with quality developer comments in a large public benchmark. These numbers come from different artifact types and different programming languages, but they all describe the same pattern.
+
+P2 and P3 go one step further than P1 by proposing a response to the problem. P1 identifies and measures the gap. P2 and P3 ask whether LLMs can fill it automatically. Reading all three together gives a more complete picture: P1 describes the problem, and P2 and P3 explore one direction toward a solution.
+
+Both follow-up papers come from the same research group at the University of North Texas. They share a dataset origin, an evaluation methodology, and several models. Each also cites the other, making them companion studies. \autoref{tab:papers-overview} gives a high-level comparison of all three papers.
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of the three papers studied in this report.}
+\label{tab:papers-overview}
+\small
+\begin{tabularx}{\linewidth}{lXXX}
+\toprule
+\textbf{Dimension} & \textbf{P1 (Core Paper)} & \textbf{P2 (Assertion Messages)} & \textbf{P3 (Test Summaries)} \\
+\midrule
+Focus artifact & Prompts in LLM applications & Assertion messages in JUnit tests & Test method summaries \\
+Language & Python & Java & Java \\
+Task & Mining and analysis & Generation (FIM) & Generation (instruction) \\
+Dataset size & 1,262 prompt changes, 243 repos & 216 test methods & 91 test methods \\
+Models & LLaMA3-70B (classifier) & 4 FIM code LLMs & 4 instruction-tuned LLMs \\
+Evaluation & Qualitative coding + LLM classify & BLEU/ROUGE/METEOR/BERTScore/LLM-Eval & BLEU/ROUGE/METEOR/BERTScore/LLM-Eval \\
+Human baseline (LLM-Eval) & N/A & 3.24/5 & 3.43/5 \\
+Best model score (LLM-Eval) & N/A & 2.76/5 (Codestral) & 4.85/5 (Codex) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Assertion Messages with LLMs (P2)}
+
+\subsection{Motivation, Research Questions, and Methodology}
+
+P2 by Aljohani et al. \cite{Aljohani2025} starts from a finding similar in spirit to what P1 reports: only about 6\% of test methods include assertion messages. That number is close to zero, just as P1 found that 78\% of prompt-changing commits contain no documentation of the change. In both cases, developers create natural language artifacts but do not explain them. P1 studied that gap for prompts. P2 studies the same kind of gap for test assertions, and asks whether LLMs can fill it automatically. When an assertion fails without a message, the developer must read the surrounding code to understand what went wrong. The paper asks two questions: (RQ1) how do LLM-generated assertion messages compare to manually written ones, and (RQ2) how do their structural and linguistic patterns align with developer-written ones? RQ1 also includes an ablation: does adding a test comment as context improve generation quality?
+
+The dataset comes from 20 well-engineered Java projects \cite{Takebayashi2023}. After filtering for single-assertion test methods with non-trivial messages, 216 test methods remain. The task is framed as fill-in-the-middle (FIM) generation: the model receives the test method with the assertion message removed and must predict the missing text. Four base (non-instruction-tuned) FIM models are evaluated: Qwen2.5-Coder-32B, Codestral-22B, CodeLlama-13B-hf, and StarCoder. For the ablation, comments are provided where available; for the remaining methods, GPT-4 generates them using chain-of-thought prompting \cite{Sun2023}. Evaluation uses BLEU, ROUGE-L, METEOR, BERTScore-F1, and LLM-Eval; developer-written messages score 3.24/5 on LLM-Eval.
+
+\subsection{Results}
+
+\autoref{tab:p2-results} shows the LLM-Eval scores for all four models, without and with contextual comments.
+
+\begin{table}[htbp]
+\centering
+\caption{LLM-Eval scores for assertion message generation (P2, RQ1). Human baseline is 3.24.}
+\label{tab:p2-results}
+\small
+\begin{tabularx}{\linewidth}{lrrrr}
+\toprule
+\textbf{Model} & \textbf{LLM-Eval (no comments)} & \textbf{LLM-Eval (with comments)} & \textbf{BLEU} & \textbf{BERTScore F1} \\
+\midrule
+CodeLlama-13B-hf   & 2.42 & 2.63 & 10.07 & 86.16 \\
+StarCoder          & 2.54 & 2.83 & 11.36 & 86.91 \\
+Qwen2.5-Coder-32B  & 2.53 & 2.73 & 15.10 & 87.83 \\
+Codestral-22B      & \textbf{2.76} & \textbf{2.97} & 14.19 & 87.72 \\
+\midrule
+\textbf{Human}     & \multicolumn{2}{c}{3.24} & -- & -- \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+None of the models reaches the human baseline. Codestral performs best on LLM-Eval, while Qwen2.5-Coder achieves the best lexical similarity scores. The most consistent finding is that adding comments improves all models across all metrics. The improvement is not dramatic, but it is consistent across all four models, which suggests that additional context about the test's purpose helps the model generate more meaningful assertion messages.
+
+Codestral is also notable for producing zero empty outputs, even before the retry mechanism was applied. The other models sometimes failed to produce output in the correct FIM format, requiring retries. In a real deployment, empty outputs are failures, and a model that requires retries adds latency and cost. The reliability differences between models matter for any practical use.
+
+For RQ2, the structural analysis shows that developers write assertion messages almost exclusively as string literals (98.15\% of the time). LLMs follow a similar pattern: Codestral generates string literals 92.59\% of the time, StarCoder 91.20\%. The n-gram analysis shows that common developer patterns are largely replicated by the models. For \texttt{assertEquals} and \texttt{assertTrue} assertions, the most frequent bigram in both human and model outputs is ``should be.'' For \texttt{assertFalse}, it is ``should not.'' However, for less common trigrams, models show more inconsistency.
+
+\subsection{Critique of P2}
+
+The paper's dataset is limited to exactly one assertion per test method, which is a simplifying assumption that excludes many real tests. Multi-assertion tests are common and arguably more interesting, since they involve assertions that may interact or depend on each other. A test that checks five conditions tells a richer story than one that checks one, and generating messages that collectively describe the full intent is harder than the single-assertion case. Extending the study to multi-assertion cases is an important direction for future work.
+
+The evaluation depends heavily on GPT-4: it is used to generate the contextual comments in the ablation study, to classify message structure, and to run LLM-Eval. This creates a risk that GPT-4's preferences are systematically built into the results. If GPT-4 tends to favor certain phrasing patterns in assertion messages, those patterns might score higher in LLM-Eval even if real developers would not prefer them. The paper acknowledges this concern and tries to mitigate it by following validated methodologies, but the issue cannot be fully eliminated. A cleaner design would use separate models for generation, classification, and evaluation.
+
+The paper's critique of BLEU, ROUGE, and METEOR is well-founded. Assertion messages are short and structurally diverse, and a model that generates a semantically correct message using different words will receive a low n-gram score even though the message is not bad. The BLEU scores in the study range from about 10 to 15, which look very low in absolute terms. But for assertion messages, a score of 10 might simply reflect the use of ``value should equal 3'' instead of the reference's ``result should be 3.'' The authors are right to emphasize LLM-Eval as the primary metric, even if that metric has its own limitations.
+
+One practical aspect the paper handles but does not fully analyze is the problem of empty outputs. Some models in the FIM setting occasionally fail to produce output in the correct format, requiring a retry. Codestral is the only model that avoids this entirely. The retry mechanism is reasonable for an experiment, but it somewhat masks real reliability differences between models.
+
+The study also does not compare against a simple rule-based baseline. Assertion messages could potentially be generated by extracting the assertion method name, variable names, and expected values and combining them into a template. Adding such a baseline would help show whether LLMs provide meaningful improvement over simpler approaches.
+
+The 6\% finding also deserves more attention than it receives. If only 6\% of test methods have assertion messages, then even a mediocre generated message is still more useful than no message, because it gives the developer something to read when a test fails. The authors note this, but they focus most of their analysis on quality comparisons rather than on the raw coverage benefit.
+
+\section{Assertion-Aware Test Code Summarization (P3)}
+
+\subsection{Motivation and Research Questions}
+
+P3 by Mollah et al. \cite{Mollah2025} builds on P2 by asking a downstream question: if assertion messages are useful documentation artifacts, can they also help LLMs generate better summaries of the entire test method? The paper investigates how different types of contextual information affect the quality of generated test summaries, with a particular focus on whether assertion-level features can substitute for the heavier-weight approach of including the full method under test (MUT).
+
+\begin{graybox}{Research Questions in P3}
 \begin{description}[style=multiline, labelindent=\parindent, leftmargin=\rqindent, itemsep=-1ex]
-\item[RQ1] ...?
-\item[RQ2] ...?
-\item[RQ3] ...?
+\item[RQ1] To what extent do assertion-level features influence the quality of LLM-generated summaries?
+\item[RQ2] How do different code LLMs compare in their effectiveness across prompt configurations?
 \end{description}
 \end{graybox}
 
-\chapter{Background}
-\label{ch:background}
+\subsection{Methodology}
 
-\lipsum[1-12]
+P3 constructs a benchmark from CodeXGLUE \cite{Lu2021} by extracting Java test methods that have at least one assertion with a message and a developer-written comment of at least four words. After filtering, 91 test methods remain, each paired with a gold comment. A key addition is the generation of ``assertion semantics'': GPT-4o converts each assertion into a short natural language description (e.g., \texttt{assertThat(user.getAge(), is(equalTo(18)))} becomes ``Checks that the user's age equals 18''). These semantics are then used as optional context.
 
-\chapter{Related Work}
-\label{ch:related-work}
+The ablation study tests seven prompt configurations: (1) test method only, (2) with assertion messages, (3) without assertion messages, (4) with assertion semantics only, (5) with messages and semantics, (6) with the full method under test (MUT), and (7) with all context combined. Unlike P2, which uses base FIM models, P3 uses instruction-tuned models (Codex-Mini, Codestral-22B, DeepSeek-Coder-33B, and Qwen2.5-Coder-32B-Instruct) with a role-based prompt that enforces a 20-word limit on the generated summary. Evaluation uses the same metric suite as P2; developer-written comments score 3.43 out of 5 on LLM-Eval.
 
-\lipsum[1-4]
+\subsection{Results}
 
-\chapter{Research Method}
-\label{ch:research-method}
+\autoref{tab:p3-results} shows selected LLM-Eval results for the four models.
 
-\lipsum[1-4]
+\begin{table}[htbp]
+\centering
+\caption{LLM-Eval scores for test code summarization across selected configurations (P3). Human baseline is 3.43.}
+\label{tab:p3-results}
+\small
+\begin{tabularx}{\linewidth}{llr}
+\toprule
+\textbf{Model} & \textbf{Configuration} & \textbf{LLM-Eval} \\
+\midrule
+Codex-Mini        & Test only (baseline)              & 4.74 \\
+Codex-Mini        & Assertion messages + semantics    & \textbf{4.85} \\
+Codex-Mini        & MUT only                          & 4.78 \\
+\midrule
+Codestral-22B     & Test only (baseline)              & 4.48 \\
+Codestral-22B     & Assertion messages + semantics    & \textbf{4.83} \\
+Codestral-22B     & MUT only                          & 4.58 \\
+\midrule
+DeepSeek-Coder    & Test only (baseline)              & 3.08 \\
+DeepSeek-Coder    & Assertion messages + semantics    & 3.74 \\
+DeepSeek-Coder    & All context (full)                & \textbf{3.88} \\
+\midrule
+Qwen2.5-Coder     & Test only (baseline)              & 4.60 \\
+Qwen2.5-Coder     & Assertion messages + semantics    & 4.75 \\
+Qwen2.5-Coder     & All context (full)                & \textbf{4.76} \\
+\midrule
+\textbf{Human}    &                                   & 3.43 \\
+\bottomrule
+\end{tabularx}
+\end{table}
 
-\section{Data Availability}
-\label{sec:data-availability}
+Several findings stand out. Adding assertion-level information consistently improves LLM-Eval scores for all models compared to the test-only baseline. Three out of four models (Codex, Codestral, Qwen) exceed the developer baseline of 3.43, which is a stronger result than in P2, where no model reached the human baseline.
 
-We provide all source code, data, and study materials as part of an online appendix hosted on GitHub.\footnote{\url{https://github.com/se-uhd/thesis-NAME}}
+DeepSeek-Coder is a consistent underperformer. Its best LLM-Eval score is 3.88, lower than the best scores of the other three models, even though it achieves competitive BERTScores. This mismatch between BERTScore and LLM-Eval confirms that semantic similarity at the embedding level does not necessarily correspond to the quality of the summary from a developer's perspective. A summary that uses many of the same words as the reference but arranges them poorly, or misses the key behavioral point, will score high on BERTScore but low on LLM-Eval. The DeepSeek result is a good illustration of why relying on a single metric gives a misleading picture.
 
-\todo{In case the dataset is too large to host it on GitHub, you can publish the online appendix on Zenodo and reference the Zenodo dataset (example: \url{https://zenodo.org/records/15130575}. You should link the GitHub repository with the source code and version history anyways.}
+Another interesting pattern is that three out of four models exceed the human baseline of 3.43 when using assertion-level information. This does not necessarily mean the models write better summaries than developers do. It is more likely that developers write test comments in a very compressed style that is not optimized for readability, while LLMs tend to produce more complete, grammatically clear sentences. The LLM-Eval criterion may favor full sentences over terse developer notes. This raises a deeper question about what a ``good'' test summary actually is, and whether LLM-Eval captures the thing developers care about.
 
-\chapter{Tool Architecture}
-\label{ch:tool-architecture}
+The finding that assertion semantics can substitute for the full MUT is practically useful, but it depends on GPT-4o being available to generate those semantics in the first place. The pipeline proposed by P3 is: (1) generate assertion semantics using GPT-4o, (2) use those semantics as context for a smaller model that generates the summary. This is a reasonable workflow, but it requires access to a powerful model at semantics-generation time. If GPT-4o is already available, one could argue it should just generate the test summary directly. The paper does not explore this comparison.
 
-\lipsum[1-4]
+\subsection{Critique of P3}
 
-\chapter{Results}
-\label{ch:results}
+The most immediate limitation is the dataset size. P3 ends up with only 91 test methods after filtering CodeXGLUE, and filtering a large benchmark down to 91 examples raises questions about how representative those examples are. The strict filtering criteria are necessary to ensure quality reference comments, but they mean the study captures the easy cases where good documentation already exists in some form. How well the approach works on messier, more typical test code is not clear.
 
-\lipsum[1-4]
+The same GPT-4 circularity concern from P2 applies here. GPT-4o is used both to generate assertion semantics and to evaluate the final summaries via LLM-Eval. Models that generate semantics in a style similar to GPT-4o may be indirectly favored in the evaluation. This is hard to avoid entirely, but it is a concern for reproducibility.
 
+The paper does not include any user study. Knowing that a model scores 4.85 on LLM-Eval tells us something, but it does not tell us whether a developer reading that summary during a debugging session actually finds it helpful. That gap is common in automated documentation research, but it remains an important limitation.
+
+Like P2, P3 is restricted to Java with JUnit4. The generalizability of these findings to other testing frameworks or languages is unknown.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Discussion}
 \label{ch:discussion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\lipsum[1-4]
+\begin{chapter-quotation}{Edsger W. Dijkstra, On the role of scientific thought (1974)}
+Separation of concerns is the only available technique for ordering one's thoughts about problems of overwhelming complexity.
+\end{chapter-quotation}
 
+\section{A Common Theme Across All Three Papers}
+
+When you step back and look at the three papers together, they are all pointing at the same thing from different angles. Developers do not write enough natural language documentation for the artifacts they create. This is not a new finding in software engineering research, but the three papers together show that it applies equally to newer artifact types like prompts and to more traditional ones like test comments.
+
+What makes the papers interesting is that each approaches the problem differently. P1 takes a diagnostic view: it measures the gap and shows what happens because of it. P2 and P3 try to do something about it by asking whether LLMs can generate the missing documentation automatically. The connection between these two angles is real but not always stated clearly in the papers themselves. P2 and P3 cite P1 mainly to justify their use of LLMs as classifiers, rather than framing their work as a direct response to P1's documentation gap finding. That framing is one of the things this report tries to make explicit.
+
+\section{From Diagnosis to Automation}
+
+Reading the three papers together, there is a natural progression from identifying a problem to proposing a technical response. P1 establishes that prompts are a new kind of software artifact that developers struggle to document and test. P2 and P3 then show that LLMs can generate useful documentation for another type of artifact that developers also rarely document: test code.
+
+The natural next step would be applying the same idea to prompts directly. If an LLM can summarize a test method based on its assertions, it could in principle also summarize what changed in a prompt based on a before-and-after diff. This would directly address the gap P1 identifies, but no paper has done this yet.
+
+P3 also contributes a general insight that likely applies beyond test summarization: assertion semantics can substitute for the full method under test with no loss in quality. This suggests that compact, behaviorally focused context is often more effective than providing all the surrounding code. Selecting the right context is itself an engineering problem, and this finding is a useful data point for anyone building documentation generation tools.
+
+\section{Methodological Convergence}
+
+All three papers use LLMs not just as the subject of study but as a tool inside the study itself. P1 uses LLaMA3-70B to classify commit messages. P2 uses GPT-4 to classify assertion message structure and to evaluate output quality. P3 uses GPT-4o to generate assertion semantics and to run LLM-Eval. This is not coincidence: all three papers deal with tasks where the ``correct'' answer involves judgment, and automated LLM-based analysis is becoming the standard way to scale that kind of judgment in software engineering research.
+
+LLM-Eval in particular is growing more common as a replacement for or supplement to human annotation, because it is faster and cheaper while still capturing aspects of quality that n-gram metrics miss. P2 and P3 both argue explicitly that BLEU, ROUGE, and METEOR are insufficient for their tasks, and that LLM-Eval is more meaningful. This is a defensible argument, but it raises a question: if LLMs are being used to evaluate the outputs of other LLMs, who evaluates the evaluator?
+
+This circularity is a concern worth raising, and it is not unique to these two papers. If GPT-4 is used to generate comments, classify structure, and judge quality in the same experiment, there is a real risk of systematically favoring GPT-4-style outputs. The most reliable way to address this would be through human user studies and more diverse evaluation approaches, neither of which is present in P2 or P3.
+
+There is also a practical concern about reproducibility. Using proprietary models like GPT-4 as evaluators makes research difficult to compare over time. GPT-4 is not a fixed system: OpenAI updates it, and a paper published today may not produce the same LLM-Eval scores if re-run a year later on a new version. Some researchers propose using open-weight models as evaluators so that the evaluation is frozen and reproducible, but this comes at the cost of evaluation quality. The field has not fully resolved this tension.
+
+All three papers also rely on relatively small human annotation samples to validate their classification or evaluation steps. While the sample sizes are reasonable for manual coding, they limit how strongly the validation claims can be made. This is a general challenge for empirical software engineering research, where human annotation is expensive to scale.
+
+\section{Limitations Across All Three Papers}
+
+\subsection{Shared Limitations}
+
+The most significant limitation shared across all three papers is narrow language coverage. P1 studies only Python, while P2 and P3 study only Java with JUnit4. This means the findings are specific to two ecosystems and may not generalize to JavaScript, TypeScript, or Go, which are also common for LLM-integrated applications. JavaScript developers often use Jest for testing, which has a different assertion style than JUnit4, and the kinds of prompts embedded in JavaScript applications may differ structurally from those in Python. Cross-ecosystem replication would significantly strengthen the claims made in all three papers.
+
+None of the three papers include a user study with real developers. P2 and P3 assess quality using automated metrics and LLM-Eval, but they do not ask developers whether the generated messages and summaries actually help during debugging. A test summary might score well on LLM-Eval but still fail to communicate the most important behavioral information to a developer unfamiliar with the codebase. We know the generated outputs look good by automated criteria, but we do not know whether they actually improve developer productivity.
+
+P1 also identifies a deeper problem that the follow-up papers do not address: the lack of testing infrastructure for LLM components. Only 7 of 101 studied projects had executable tests for their LLM parts. Documentation and generation tools like those in P2 and P3 are useful, but they are not a substitute for the kind of systematic testing that regular code enjoys.
+
+\subsection{Dataset Scale and Diversity}
+
+All three papers work with relatively small datasets by the standards of large-scale empirical software engineering studies. P1 uses 1,262 prompt changes from 243 repositories, but these repositories were filtered by star count and contributor count, meaning they are above-average quality projects. The findings may not apply to smaller, less maintained projects where prompt management practices are likely worse. P2 uses 216 test methods and P3 uses 91, both of which are small for drawing general conclusions. The filtering criteria in P2 and P3 are strict for good reason (they need high-quality examples to validate against), but this means the studies capture the easy cases where documentation artifacts already exist in some form.
+
+The difficulty of collecting suitable data is itself informative. P3 needed to filter a large benchmark down to just 91 usable test methods, because finding tests with both assertion messages and quality developer comments is so rare. This rarity confirms the main motivation of the paper: if documentation were common, there would be no problem to solve. The small dataset sizes are not just a methodological limitation; they reflect the real-world scarcity of the artifacts being studied.
+
+\section{Implications for Practice}
+
+The findings across the three papers have concrete implications for software development teams that use LLMs or maintain large test suites.
+
+\textbf{For teams building LLM-integrated applications:} The main lesson from P1 is that prompt changes should be treated with the same care as code changes. In practice, this means developers should write commit messages that describe what changed in the prompt and why, not just what changed in the code. The 78\% undocumented rate is not purely a matter of developer discipline: it also reflects that no tools exist to prompt developers to explain prompt changes. A simple pre-commit hook that detects prompt changes and asks for a brief explanation would be a low-cost intervention with potentially real benefits.
+
+The inconsistency finding from P1 also suggests that code review processes should include prompt changes specifically. A reviewer checking that the code logic is correct may not think to check whether a new instruction in the prompt contradicts an existing one. Checklists for prompt review, similar to the security checklists used for code review, could help teams catch these issues before they reach production.
+
+The effectiveness analysis in P1, though based on a small sample, highlights a real problem: developers cannot easily verify whether a prompt change does what they intended. For teams building LLM-integrated applications, even basic prompt evaluation pipelines would help. Running the LLM on a fixed set of representative inputs and comparing the before/after outputs manually is better than nothing, even if it is less rigorous than a unit test.
+
+\textbf{For teams maintaining test suites:} The main lesson from P2 and P3 is that automatically generating test documentation is now technically feasible and the quality is good enough to be useful. The gap between model output and human baseline is small for test summaries (in most configurations models exceed the baseline) and more noticeable for assertion messages (where no model reaches the human baseline). In both cases, the generated output is better than nothing, which is the realistic alternative given that the documentation rate starts near zero.
+
+A practical approach would be integrating assertion message generation into the IDE as a suggestion mechanism, similar to how code completion works. When a developer writes an assertion without a message, the tool could suggest one based on the assertion content and the surrounding test code. The developer could accept, edit, or ignore the suggestion. This is less intrusive than a rule forcing documentation, and it reduces the friction enough that coverage would likely improve.
+
+For test summaries, the P3 finding that assertion semantics can substitute for the full method under test is important for efficiency. Including the full production method as context makes the prompt longer, more expensive, and potentially noisier. Using compact semantic descriptions of the assertions is cheaper and just as effective. For anyone building documentation generation tools, this suggests starting with minimal necessary context rather than including everything.
+
+\textbf{On evaluation:} One implication that spans all three papers is the inadequacy of lexical metrics for evaluating natural language software artifacts. BLEU, ROUGE, and METEOR are standard metrics in many automated evaluation pipelines, but all three papers show or argue that they are misleading for short, diverse texts. Teams building evaluation pipelines for generated documentation should prioritize LLM-Eval or human evaluation, especially for tasks where the output is short and the vocabulary is varied. Using only lexical metrics could lead to selecting models that score well on n-gram overlap but produce outputs that are not actually useful to developers.
+
+\section{Personal Reflection}
+
+I found the core paper (P1) the most thought-provoking of the three. The finding that 78\% of prompt changes are undocumented was more striking than I expected. In normal software development, undocumented changes are treated as a quality problem. For prompts, it seems to be the default rather than the exception. Part of the reason is probably that prompt changes feel informal to developers: you change a string, run the application, see if it works better, and move on. There is no compilation step that forces you to think carefully about what you are doing.
+
+But as P1 makes clear, prompts are not trivial. They control the behavior of an LLM component that may be central to the application's value. A poorly documented prompt change is just as problematic as a poorly documented code change. I think the main reason this is not treated more seriously is that the tooling does not exist to make it easy. If there were a Git hook that analyzed prompt diffs and suggested documentation, or a testing framework that ran prompt specifications automatically, developers might be more disciplined.
+
+The two follow-up papers feel more incremental to me, though they are well-executed. The core finding, that LLMs can generate useful documentation and that context helps, is intuitive. What I found more interesting in P3 is the negative result: adding the full MUT does not always help, and sometimes makes the results slightly worse. This suggests that LLMs can be overwhelmed by irrelevant context, which has practical implications for how these systems should be designed. It also fits with a broader pattern in LLM research: more context is not always better, and selecting the right context is itself an engineering problem.
+
+If I were to design the next study in this line of research, I would try to combine the insights of all three papers. I would build a tool that automatically detects prompt changes in a repository, generates a natural language summary of what changed using a method similar to P3, and flags potential inconsistencies using the technique from P1. This would address the documentation gap directly, using automation rather than relying on developers to document changes manually. The tool could be evaluated both with automated metrics and with a user study measuring whether it actually reduces debugging time.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Conclusion and Future Work}
 \label{ch:conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\lipsum[1-4]
+This report analyzed three papers that together look at natural language artifacts in software engineering from different angles.
 
-\listoffigures
- 
-\listoftables
+\section{Summary of Findings}
+
+The core paper (P1) by Tafreshipour et al. \cite{Tafreshipour2025} provides the first empirical evidence that prompts in open-source LLM-integrated applications evolve over time in structured ways. Developers tend to expand prompts by adding and modifying Consideration components, which carry behavioral instructions. These changes are rarely documented (only 21.9\% of prompt-changing commits mention the change), and there is limited evidence that the changes reliably achieve their intended effect. P1 also shows that prompt changes can introduce logical inconsistencies that would be caught by a compiler in regular code, but go undetected in prompts.
+
+The first follow-up paper (P2) by Aljohani et al. \cite{Aljohani2025} demonstrates that LLMs can generate assertion messages for Java unit tests, though none of the four evaluated models reaches the quality of developer-written messages. Adding a description of the test's purpose as context consistently improves all models. The structural analysis shows that LLMs largely mimic developer preferences (favoring plain string literal messages), but struggle with less common linguistic patterns.
+
+The second follow-up paper (P3) by Mollah et al. \cite{Mollah2025} shows that assertion-level information (messages and semantics) improves the quality of LLM-generated test summaries compared to a test-method-only baseline. The key finding is that assertion semantics, which are compact natural language descriptions of what assertions check, can substitute for the full method under test without sacrificing quality. Three of the four evaluated models exceed the developer-written baseline in human-aligned evaluation, which is a stronger result than P2 achieves.
+
+\section{Connections Between the Papers}
+
+All three papers deal with the documentation of natural language artifacts in software: prompts, assertion messages, and test summaries are artifacts that developers create but rarely document well. They also share a methodological approach, using LLMs as classifiers and evaluators of software artifacts. P2 and P3 move from diagnosing the problem to proposing automated solutions, and both show that adding contextual information consistently improves generation quality.
+
+The papers also agree on a limitation of standard evaluation metrics. BLEU, ROUGE, and METEOR count word overlaps without understanding meaning, and all three papers either argue or demonstrate that these metrics are insufficient for their tasks. P2 and P3 both use LLM-Eval as a more meaningful alternative.
+
+Another shared feature is the use of powerful models to automate tasks that would otherwise require human judgment: classifying commit messages, generating intermediate documentation, and evaluating output quality. This reflects a shift happening more broadly in empirical software engineering research, where LLMs are increasingly used as tools inside the study, not just as the subject being studied. This creates opportunities for research at larger scales, but also introduces bias and reproducibility challenges the field is still working through.
+
+All three papers leave the same kind of opening for future work: the technical findings need to be translated into tools that developers can actually use, and those tools need to be evaluated against real workflows. P1 shows what goes wrong with prompt management. P2 and P3 show that LLMs can generate useful test documentation. What has not been done yet is the work of building and evaluating tools that bring these insights together.
+
+\section{Future Work}
+
+Several directions for future research emerge from this analysis.
+
+\textbf{Prompt documentation tools.} The documentation gap identified in P1 could be addressed by building tools that automatically generate summaries of prompt changes, using the kind of context-aware generation demonstrated in P3. A concrete version of this tool would take the before and after versions of a prompt as input, generate a natural language description of what changed and why (for example, ``Added a Consideration component restricting the output language to English''), and suggest this description as a commit message annotation. Such tools could be integrated into version control workflows as pre-commit hooks or as IDE plugins that analyze prompt diffs.
+
+\textbf{Prompt testing infrastructure.} The finding that almost no open-source projects have test cases for their LLM components is a serious gap. Future work should develop frameworks specifically for testing LLM-integrated components, including tools that detect when a prompt change causes a behavioral regression. One approach would be to use expected-behavior specifications, similar to property-based testing in regular code: define the types of responses that are acceptable for a given input, and check after each prompt change whether the model still satisfies those specifications. This would be less precise than a unit test, but more useful than no testing at all.
+
+\textbf{Cross-language studies.} P1 covers Python and P2 and P3 cover Java. The findings may not transfer across languages or testing frameworks. Python prompts may follow different structural patterns than prompts embedded in Java or TypeScript applications. Similarly, JUnit4 assertion patterns differ from those in Python's pytest or in JavaScript testing frameworks. Cross-language replication studies would significantly strengthen the generalizability of all three contributions.
+
+\textbf{User studies.} None of the three papers include user studies with real developers. Future work should measure whether generated documentation actually helps in practice. For assertion messages, this could mean a controlled study where some developers debug failing tests with generated messages and others debug without, comparing the time to fix and the accuracy of diagnosis. For prompt change documentation, a study could measure whether generated summaries in commit messages reduce the time needed for code review. These studies are expensive to run, but they are the only way to confirm that improvements in automated metrics translate to real benefits.
+
+\textbf{Multi-assertion test methods.} P2 restricts its dataset to test methods with exactly one assertion. Most real tests have multiple assertions, which may interact in complex ways. Extending the assertion message generation approach to multi-assertion tests is an important next step. It is not enough to generate a good message for each assertion independently: the messages should collectively tell a coherent story about what the test is checking.
+
+\textbf{Longitudinal studies.} P1 takes a snapshot of prompt evolution up to August 2024. A longitudinal study tracking the same repositories over multiple years would reveal whether prompt management practices improve as the field matures, and whether the documentation gap narrows as awareness of the problem grows. It would also be interesting to track whether specific projects adopt better practices after research like P1 is published, which would suggest a feedback loop between academic research and industry practice.
+
+\section{Closing Remarks}
+
+The ``prompts as software artifacts'' framing is a useful way to think about what LLM-integrated development actually requires. Prompts are not strings that you write once and ignore. They need attention to correctness, documentation, and testing, the same as regular code does. The three papers in this report help establish that point with evidence and begin to show what better tooling might look like. There is still much work to do, but the direction these papers point to is worth following.
+
 
 \bibliographystyle{plainnat}
 \bibliography{literature}
-
-\begin{appendices}
-
-\chapter{Title}
-
-\end{appendices}
 
 \backmatter
 
