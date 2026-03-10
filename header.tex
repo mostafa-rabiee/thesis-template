@@ -5,6 +5,10 @@
 
 % configure graphics
 \usepackage[pdftex]{graphicx}
+\usepackage[export]{adjustbox} % provides valign option for includegraphics
+
+% colors with mixing support
+\usepackage[dvipsnames]{xcolor}
 
 % fonts
 %\usepackage{mathpazo} % Palatino font (serif)
@@ -15,18 +19,18 @@
 
 % math formulas
 \usepackage{amsmath}
-\usepackage{amssymb} 
-\usepackage{eucal} % more curly versions for \mathcal{...}
-\usepackage{nicefrac} % % nicer fractions
-\usepackage{bm} % bold math symbols
+\usepackage{amssymb}
+%\usepackage{eucal} % not used in this report
+%\usepackage{nicefrac} % not used in this report
+%\usepackage{bm} % not used in this report
 
-% outlined characters
-\usepackage{contour}
-\contourlength{0.1pt}
+% outlined characters (not used in this report)
+%\usepackage{contour}
+%\contourlength{0.1pt}
 
-% scientific notation
-\usepackage{siunitx}
-\sisetup{output-exponent-marker=\ensuremath{\mathrm{e}}}
+% scientific notation (not used in this report)
+%\usepackage{siunitx}
+%\sisetup{output-exponent-marker=\ensuremath{\mathrm{e}}}
 
 % page margins
 \usepackage[paper=a4paper, inner=30mm, outer=25mm, top=30mm, bottom=25mm, head=21pt]{geometry}
@@ -42,11 +46,11 @@
 % prevent single lines at the end of a paragraph (Hurenkinder)
 \widowpenalty = 10000 \displaywidowpenalty = 10000
 
-% enables text wrapping around figures.
-\usepackage{wrapfig} 
+% enables text wrapping around figures (not used in this report)
+%\usepackage{wrapfig}
 
-% allows you to insert \FloatBarrier commands at places that floats should not move past, perhaps at every \section
-\usepackage{placeins}
+% allows you to insert \FloatBarrier commands (not used in this report)
+%\usepackage{placeins}
 
 % 1st, 2nd, 3rd, etc.
 \usepackage[super]{nth}
@@ -88,7 +92,7 @@
       % Trennlinie
       \put(22,13){\linethickness{0.5pt}\line(1,0){\dimexpr
           \textwidth-24\unitlength\relax\@gobble}}
-      % Kapitelnummer    
+      % Kapitelnummer
       \put(-1.4,0.8){\makebox(18,18)[r]{%
           \color{white}\fontsize{22\unitlength}{28\unitlength}\selectfont\thechapter
           %\kern-.05em% Ziffer in der Zeichenzelle nach rechts schieben
@@ -102,11 +106,15 @@
   \endgroup
 }
 
+% reduce whitespace at the top of chapter pages
+\renewcommand*{\chapterheadstartvskip}{\vspace{0pt}}
+\makeatother
+
 % fancy headings (thanks to Fabian Beck, Rainer Lutz, Benjamin Biegel, and ChatGPT)
 \usepackage{scrlayer-scrpage}
 \usepackage[listings=false]{scrhack} % suppress warnings
 \pagestyle{scrheadings}
-\clearpairofpagestyles 
+\clearpairofpagestyles
 \lehead{\colorbox{black}{\framebox[1cm][c]{\textcolor{white}{\textbf{\small\thepage}}}}\hspace{0.4cm}{\leftmark}}
 \rohead{\rightmark\hspace{0.4cm}\colorbox{black}{\framebox[1cm][c]{\textcolor{white}{\textbf{\small\thepage}}}}}
 \setkomafont{pageheadfoot}{\fontfamily{pag}\selectfont\footnotesize}
@@ -118,12 +126,9 @@
 \newenvironment{chapter-quotation}[1]
 {\begin{quotation}\pushQED{#1}\noindent\slshape\quotemarks{``}\hspace{-2pt}}
 {\hspace{-2pt}\quotemarks{''}\fontsize{10}{10}\normalfont\\{ }\\\hspace*{\fill}---\popQED\end{quotation}}
-%\newenvironment{chapter-quotation}[1]
-%{\pushQED{#1}\begin{quotation}``''}
-%{\begin{flushright}---\popQED\end{flushright}\end{quotation}}
 
 % tables
-\usepackage{multirow}
+%\usepackage{multirow} % not used in this report
 
 % editorial commands
 \newcommand{\boxedtext}[1]{\fbox{\scriptsize\bfseries\textsf{#1}}}
@@ -154,18 +159,18 @@
 % allow to configure enumerate/itemize environment
 \usepackage{enumitem}
 
-% use \widthof{<string>} to use as length 
+% use \widthof{<string>} to use as length
 \usepackage{calc}
 
-% boxes for results
-\usepackage[framemethod=tikz]{mdframed}
+% boxes for results (framemethod=default to avoid tikz overhead on Overleaf)
+\usepackage{mdframed}
 \newmdenv[
   innerleftmargin=7pt,
   innerrightmargin=7pt,
   skipabove=\baselineskip,
   skipbelow=\baselineskip,
-  tikzsetting={draw=black,dashed,line width=0.5pt,dash pattern = on 4pt off 2pt},
-  linecolor=white,
+  linecolor=black,
+  linewidth=0.5pt,
   backgroundcolor=white
 ]{dashedbox}
 \newmdenv[
@@ -173,8 +178,8 @@
   innerrightmargin=7pt,
   skipabove=\baselineskip,
   skipbelow=\baselineskip,
-  tikzsetting={draw=black, line width=0.5pt},
   linecolor=black,
+  linewidth=0.5pt,
   backgroundcolor=white
 ]{normalbox}
 \newmdenv[
@@ -187,8 +192,8 @@
   innerbottommargin=0pt,
   innerleftmargin=7pt,
   innerrightmargin=0pt,
-  tikzsetting={draw=black, line width=3pt},
   linecolor=black,
+  linewidth=3pt,
   backgroundcolor=white
 ]{verticalline}
 \newmdenv[
@@ -201,10 +206,28 @@
   innerbottommargin=6pt,
   innerleftmargin=12pt,
   innerrightmargin=12pt,
-  tikzsetting={draw=black, line width=4pt},
   linecolor=black,
+  linewidth=4pt,
   backgroundcolor=background-gray
 ]{verticalline-background}
+
+% colored box with title - using mdframed instead of tcolorbox to avoid tikz overhead
+\newenvironment{graybox}[1]{%
+  \begin{mdframed}[%
+    backgroundcolor=black!3!white,%
+    linecolor=black!20!white,%
+    linewidth=0.5pt,%
+    innerleftmargin=7pt,%
+    innerrightmargin=7pt,%
+    innertopmargin=6pt,%
+    innerbottommargin=6pt,%
+    frametitle={\sffamily\bfseries #1},%
+    frametitleaboveskip=3pt,%
+    frametitlebelowskip=3pt,%
+  ]%
+}{%
+  \end{mdframed}%
+}
 
 % source code listings
 \usepackage{listings}
@@ -256,8 +279,8 @@
 \definecolor{VeryLightGray}{rgb}{0.92,0.92,0.92}
 \newcommand{\graybg}{\cellcolor{VeryLightGray}}
 
-% dummy text
-\usepackage{lipsum}
+% dummy text (not used in this report)
+%\usepackage{lipsum}
 
 % configure captions
 \usepackage[font=small, labelfont=bf, labelsep=endash, format=plain]{caption}
@@ -276,13 +299,13 @@
 \newcommand{\refRQ}[1]{\hfill {\tiny $\rightarrow RQ#1$}}
 \newcommand{\refTab}[2]{{\scriptsize(#1,#2)}}
 
-% rotate figures and tables
-\usepackage{rotating}
+% rotate figures and tables (not used in this report)
+%\usepackage{rotating}
 
-% sub-figures
-\usepackage{subcaption}
+% sub-figures (not used in this report)
+%\usepackage{subcaption}
 
-\usepackage[export]{adjustbox} % draw boxes around figures
+%\usepackage[export]{adjustbox} % not used in this report
 
 % configure quote environment
 \usepackage{quoting}
@@ -291,30 +314,18 @@
 \quotingsetup{rightmargin=2em}
 \quotingsetup{vskip=1.5ex}
 
-% formatting for code 
+% formatting for code
 \newcommand{\myCode}[1]{\texttt{\small#1}}
 
-% pseudocode
-\usepackage{algpseudocode}
-\usepackage{algorithm}
+% pseudocode (not used in this report)
+%\usepackage{algpseudocode}
+%\usepackage{algorithm}
 
 % indention of RQs
 \newlength{\rqindent}\setlength{\rqindent}{\parindent+\widthof{RQ1\ }}
 
-% appendix
-\usepackage[titletoc]{appendix}
-
-% colored boxes
-\usepackage{tcolorbox}
-\newtcolorbox{graybox}[1]{
-    colback=black!3!white,
-    colframe=black!15!white,
-    coltitle=black!80!white,
-    fonttitle=\sffamily\bfseries,
-    toptitle=3pt,
-    bottomtitle=3pt,
-    title={#1}
-}
+% appendix (not used in this report)
+%\usepackage[titletoc]{appendix}
 
 % custom quotes
 \usepackage{csquotes}
